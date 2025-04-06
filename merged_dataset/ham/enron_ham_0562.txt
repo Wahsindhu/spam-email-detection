@@ -1,0 +1,4 @@
+Subject: revision # 1 - enron / hpl actuals for july 5 , 2000
+Date: 2000-07-06
+
+teco tap 10 . 000 / enron ; 85 . 000 / hpl iferc

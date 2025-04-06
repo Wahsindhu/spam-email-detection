@@ -1,0 +1,4 @@
+Subject: schedule crawler : hourahead failure
+Date: 2001-12-19
+
+start date : 12 / 19 / 01 ; hourahead hour : 17 ; hourahead schedule download failed . manual intervention required .

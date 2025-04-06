@@ -1,0 +1,7 @@
+Subject: storage model security
+Date: 2000-02-03
+
+stinson ,
+i have added a time bomb and security file check to the model .
+we are ready to release it to brad , and improve the model from his feed back .
+zimin

@@ -1,0 +1,5 @@
+Subject: revision # 1 - enron actuals for july 31 , 2000
+Date: 2000-08-01
+
+teco tap 115 . 000 / hpl gas daily ;
+ls hpl lsk ic 27 . 500 / enron ; 2 . 500 / hpl gas daily

@@ -1,0 +1,5 @@
+Subject: ps on the new xmim tool for excel
+Date: 2000-05-19
+
+when you install this , you need to change the xmim server from " xmimhost " to
+" limbo " ( port is still 0 )

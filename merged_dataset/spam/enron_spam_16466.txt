@@ -1,0 +1,4 @@
+Subject: hello
+Date: 2005-04-29
+
+mail transaction failed . partial message is available .

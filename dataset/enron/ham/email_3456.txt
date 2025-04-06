@@ -1,0 +1,4 @@
+Subject: temp forecast model . xls
+Date: 2001-08-30
+
+this is the file with our city temperature weights .

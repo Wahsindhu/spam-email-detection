@@ -1,0 +1,6 @@
+Subject: delivery status notification ( failure )
+Date: 2005-07-19
+
+this is an automatically generated delivery status notification .
+delivery to the following recipients failed .
+noumanb @ multinet . com . pk
