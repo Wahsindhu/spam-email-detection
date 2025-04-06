@@ -45,8 +45,3 @@ Proyek ini dibangun menggunakan Python 3 dan library berikut:
 Instalasi environment (opsional):
 ```bash
 pip install -r requirements.txt
-
-
----
-
-Kalau kamu mau aku generate juga `requirements.txt` secara otomatis dari environment kamu, tinggal upload `venv` atau kasih tahu library yang kamu pakai. Mau lanjut ke pembuatan model sekarang?
