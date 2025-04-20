@@ -1,44 +1,66 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.utils import resample
-import joblib
+import pickle
 
-# 1. Baca dataset gabungan
+# Load data
 df = pd.read_csv("combined_email_dataset.csv")
 
-# 2. Cek jumlah awal spam dan ham
-spam = df[df['label'] == 'spam']
-ham = df[df['label'] == 'ham']
-print("Jumlah spam:", len(spam))
-print("Jumlah ham:", len(ham))
+# Bersihkan data
+df = df.dropna(subset=["body"])
+df["source"] = df["source"].str.lower()
+df["label"] = df["label"].str.lower()
 
-# 3. Samakan jumlah data spam dan ham (undersampling)
-min_len = min(len(spam), len(ham))
-spam_downsampled = resample(spam, replace=False, n_samples=min_len, random_state=42)
-ham_downsampled = resample(ham, replace=False, n_samples=min_len, random_state=42)
+print("📚 Sumber data unik:", df["source"].unique())
 
-# 4. Gabungkan kembali data yang telah diseimbangkan
-df_balancing = pd.concat([spam_downsampled, ham_downsampled])
-df_balancing = df_balancing.sample(frac=1, random_state=42).reset_index(drop=True)  # acak baris
+# Pisahkan berdasarkan sumber dan label
+df_spamassassin = df[df["source"] == "spamassassin"]
+df_enron = df[df["source"] == "enron"]
 
-print("\nSetelah balancing:")
+# Hitung jumlah yang tersedia dari SpamAssassin
+spam_sa = df_spamassassin[df_spamassassin["label"] == "spam"]
+ham_sa = df_spamassassin[df_spamassassin["label"] == "ham"]
+
+print("Jumlah SpamAssassin spam:", len(spam_sa))
+print("Jumlah SpamAssassin ham :", len(ham_sa))
+
+# Target total
+target_per_class = 10000
+
+# Hitung kekurangan dari Enron
+def get_extra(df_main, df_backup, label, total_target):
+    n_main = len(df_main)
+    needed = total_target - n_main
+    if needed <= 0:
+        return resample(df_main, replace=False, n_samples=total_target, random_state=42)
+    else:
+        df_extra = df_backup[df_backup["label"] == label]
+        df_extra_sample = resample(df_extra, replace=False, n_samples=needed, random_state=42)
+        return pd.concat([df_main, df_extra_sample])
+
+# Ambil spam dan ham sesuai target
+spam_final = get_extra(spam_sa, df_enron, "spam", target_per_class)
+ham_final = get_extra(ham_sa, df_enron, "ham", target_per_class)
+
+# Gabung dan acak
+df_balancing = pd.concat([spam_final, ham_final]).sample(frac=1, random_state=42).reset_index(drop=True)
+
+print("\n📊 Komposisi akhir (Spam + Ham):")
 print(df_balancing["label"].value_counts())
 
-# 5. Hapus nilai kosong di kolom 'body'
-df_balancing['body'] = df_balancing['body'].fillna('')
-
-# 6. TF-IDF Vectorizer
+# TF-IDF
 vectorizer = TfidfVectorizer(max_features=5000)
 X_tfidf = vectorizer.fit_transform(df_balancing["body"])
 
 print(f"\n✅ TF-IDF berhasil dibuat. Shape: {X_tfidf.shape}")
 
-# 7. Simpan dataset hasil balancing ke file
+# Simpan
 df_balancing.to_csv("balanced_email_dataset.csv", index=False)
-print("📁 Dataset seimbang disimpan sebagai balanced_email_dataset.csv")
+with open("tfidf_features.pkl", "wb") as f:
+    pickle.dump(X_tfidf, f)
 
-# 8. Simpan TF-IDF dan label untuk keperluan training nanti
-joblib.dump(X_tfidf, "tfidf_features.pkl")
-df_balancing['label'].to_csv("labels.csv", index=False)
+df_balancing["label"].to_csv("labels.csv", index=False)
+
+print("📁 Dataset seimbang disimpan sebagai balanced_email_dataset.csv")
 print("📦 TF-IDF matrix disimpan sebagai tfidf_features.pkl")
 print("📑 Label disimpan sebagai labels.csv")

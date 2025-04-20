@@ -1,22 +1,21 @@
-import os
+import pandas as pd
 import matplotlib.pyplot as plt
 
-# Lokasi folder hasil gabungan
-spam_dir = "merged_dataset/spam"
-ham_dir = "merged_dataset/ham"
+# Baca dataset
+csv_path = "combined_email_dataset.csv"
+df = pd.read_csv(csv_path)
 
-# Hitung jumlah file .txt di setiap folder
-spam_count = len([f for f in os.listdir(spam_dir) if f.endswith(".txt")])
-ham_count = len([f for f in os.listdir(ham_dir) if f.endswith(".txt")])
+# Hitung distribusi label
+label_counts = df['label'].value_counts()
 
 # Tampilkan jumlah
 print("Distribusi Dataset:")
-print(f"📧 Spam: {spam_count} email")
-print(f"📨 Ham: {ham_count} email")
+for label, count in label_counts.items():
+    print(f"{label.capitalize()}: {count} email")
 
 # Visualisasi
-labels = ['Spam', 'Ham']
-counts = [spam_count, ham_count]
+labels = label_counts.index.tolist()
+counts = label_counts.values.tolist()
 
 plt.bar(labels, counts, color=['red', 'green'])
 plt.title("Distribusi Email Spam vs Ham")
