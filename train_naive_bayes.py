@@ -7,6 +7,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
+import joblib  # Untuk simpan dan load model
 
 # 1. Load dataset
 df = pd.read_csv("balanced_email_dataset.csv")
@@ -44,3 +45,8 @@ plt.ylabel("Actual")
 plt.title("Confusion Matrix")
 plt.tight_layout()
 plt.show()
+
+# 9. Simpan model dan vectorizer
+joblib.dump(model, "naive_bayes_model.pkl")
+joblib.dump(vectorizer, "tfidf_vectorizer.pkl")
+print("Model dan vectorizer berhasil disimpan.")
