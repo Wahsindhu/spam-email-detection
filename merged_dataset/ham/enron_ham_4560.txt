@@ -1,4 +1,0 @@
-Subject: protocol regarding data and document migration - final
-Date: 2002-02-05
-
-attached is the final version of the protocol regarding data and document migration .

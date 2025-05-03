@@ -1,5 +1,0 @@
-Subject: tufco - prebid
-Date: 2000-06-22
-
-hplr est . 65000
-wb est . 40000

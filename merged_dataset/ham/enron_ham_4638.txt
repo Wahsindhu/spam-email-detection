@@ -1,5 +1,0 @@
-Subject: enron / hpl actuals for sept . 5 , 2000
-Date: 2000-09-06
-
-teco tap 25 . 000 / enron ; 88 . 750 / hpl hpl iferc
-ls hpl lsk ic 25 . 000 / enron

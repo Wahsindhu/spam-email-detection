@@ -1,4 +1,0 @@
-Subject: bridge errors
-Date: 2000-08-07
-
-keep an eye on the bridge - these are still erroring out .

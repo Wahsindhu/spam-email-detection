@@ -1,6 +1,0 @@
-Subject: enron actuals for june 22 , 2000
-Date: 2000-06-23
-
-teco tap 100 . 000 / hpl iferc
-20 . 000 / enron
-ls hpl katy 30 . 000 / enron

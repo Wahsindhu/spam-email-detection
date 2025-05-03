@@ -1,6 +1,0 @@
-Subject: delivery status notification ( failure )
-Date: 2005-07-19
-
-the following message to was undeliverable .
-the reason for the problem :
-5 . 1 . 0 - unknown address error 550 - ' 5 . 1 . 1 unknown or illegal alias : gkoppmal @ elp . rr . com '

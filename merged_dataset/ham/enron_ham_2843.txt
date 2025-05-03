@@ -1,5 +1,0 @@
-Subject: external counterparty / external user logins
-Date: 2001-10-24
-
-external user logins : 891
-external counterparty logins : 4726
